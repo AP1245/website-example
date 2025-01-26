@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>בקשה להצעת מחיר</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            direction: rtl;
+            text-align: right;
+            margin: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        input, textarea, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <h1>טופס בקשה להצעת מחיר</h1>
+    <form id="quoteForm">
+        <label for="name">שם הלקוח:</label>
+        <input type="text" id="name" placeholder="הכנס את שמך" required>
+
+        <label for="carNumber">מספר הרכב:</label>
+        <input type="text" id="carNumber" placeholder="הכנס את מספר הרכב" required>
+
+        <label for="parts">רשימת חלקים:</label>
+        <textarea id="parts" placeholder="הכנס את רשימת החלקים הדרושים" rows="4" required></textarea>
+
+        <label>סוג החלק:</label>
+        <div>
+            <label>
+                <input type="radio" name="partType" value="מקורי" required> מקורי
+            </label>
+            <label>
+                <input type="radio" name="partType" value="חליפי" required> חליפי
+            </label>
+        </div>
+
+        <button type="button" onclick="sendToWhatsApp()">שלח לוואטסאפ</button>
+    </form>
+
+    <script>
+        function sendToWhatsApp() {
+            const name = document.getElementById('name').value;
+            const carNumber = document.getElementById('carNumber').value;
+            const parts = document.getElementById('parts').value;
+            const partType = document.querySelector('input[name="partType"]:checked').value;
+
+            const message = `שם הלקוח: ${name}%0Aמספר הרכב: ${carNumber}%0Aרשימת חלקים: ${parts}%0Aסוג חלק: ${partType}`;
+            const phoneNumber = "972506780555";
+
+            const link = `https://wa.me/${phoneNumber}?text=${message}`;
+            window.location.href = link; // Navigate directly to the WhatsApp link
+        }
+    </script>
+</body>
+</html>
